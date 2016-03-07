@@ -1,5 +1,7 @@
 package com.based;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -24,6 +26,48 @@ public class Player {
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.rect(hitBox.x,hitBox.y,
                 hitBox.width,hitBox.height);
+    }
+
+    private void updateHitBox() {
+        hitBox.setPosition(x, y);
+    }
+
+    public void updatePosition(int x, int y) {
+        this.x = x;
+        this.y = y;
+        updateHitBox();
+    }
+
+    public void update() {
+        Input input = Gdx.input;
+
+        //up,down movement
+        if(input.isKeyPressed(Input.Keys.W)) {
+            ySpeed = yMaxSpeed;
+        }
+        else if(input.isKeyPressed(Input.Keys.S)) {
+            ySpeed = -yMaxSpeed;
+        }
+        else {
+            ySpeed = 0;
+        }
+        //left,right movement
+        if(input.isKeyPressed(Input.Keys.A)) {
+            xSpeed = -xMaxSpeed;
+        }
+        else if(input.isKeyPressed(Input.Keys.D)) {
+            xSpeed = xMaxSpeed;
+        }
+        else {
+            xSpeed = 0;
+        }
+
+        //move player
+        x += xSpeed;
+        y += ySpeed;
+
+        updateHitBox();
+
     }
 
 }

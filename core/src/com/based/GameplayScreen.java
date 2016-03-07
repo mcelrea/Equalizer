@@ -22,13 +22,18 @@ public class GameplayScreen implements Screen {
     SpriteBatch spriteBatch; //draw textures to the screen
     ShapeRenderer shapeRenderer; //draw shapes to the screen
 
+    Area overWorld[][];
+
     Player player;
+    private int playerRow = 3;
+    private int playerCol = 7;
 
     private MyGdxGame game;
 
     public GameplayScreen(MyGdxGame game) {
         this.game = game;
         player = new Player();
+        overWorld = new Area[10][16];
     }
 
     /*
@@ -61,11 +66,10 @@ public class GameplayScreen implements Screen {
     }
 
     private void draw() {
-
     }
 
     private void update(float delta) {
-
+        player.update();
     }
 
     private void clearScreen() {
