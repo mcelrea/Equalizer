@@ -3,6 +3,7 @@ package com.based;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 
 public class LoadingScreen implements Screen {
 
@@ -14,7 +15,7 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void show() {
-
+        game.getAssetManager().load("untitled.tmx", TiledMap.class);
     }
 
     /*

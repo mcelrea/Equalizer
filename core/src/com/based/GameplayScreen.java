@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -21,6 +23,7 @@ public class GameplayScreen implements Screen {
     Viewport viewport; //lock the dimensions of the screen
     SpriteBatch spriteBatch; //draw textures to the screen
     ShapeRenderer shapeRenderer; //draw shapes to the screen
+    OrthogonalTiledMapRenderer mapRenderer; //draw Tiled maps
 
     Area overWorld[][];
 
@@ -34,6 +37,11 @@ public class GameplayScreen implements Screen {
         this.game = game;
         player = new Player();
         overWorld = new Area[10][16];
+        createOverWorld();
+    }
+
+    private void createOverWorld() {
+        overWorld[3][7]= new Area((TiledMap)game.getAssetManager().get("untitled.tmx"));
     }
 
     /*
@@ -47,6 +55,9 @@ public class GameplayScreen implements Screen {
         shapeRenderer.setAutoShapeType(true);
         spriteBatch = new SpriteBatch();
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
+        viewport.apply(true);//NEED THIS OR MAP ONLY SHOWS LIKE 2 TILES
+        mapRenderer = new OrthogonalTiledMapRenderer(overWorld[3][7].getMap(), spriteBatch);
+        mapRenderer.setView(camera);
     }
 
     @Override
@@ -66,6 +77,9 @@ public class GameplayScreen implements Screen {
     }
 
     private void draw() {
+        spriteBatch.setProjectionMatrix(camera.projection);
+        spriteBatch.setTransformMatrix(camera.view);
+        mapRenderer.render();
     }
 
     private void update(float delta) {
