@@ -94,6 +94,9 @@ public class GameplayScreen implements Screen {
 
     private void update(float delta) {
         player.update();
+        Array<CollisionCell> collisionCells = whichCellsDoesPlayerCover();
+        filterOutNonCollisionCells(collisionCells);
+        handlePlayerCollision();
     }
 
     private void clearScreen() {
