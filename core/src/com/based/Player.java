@@ -10,8 +10,8 @@ public class Player {
 
     public static final float WIDTH = 25;
     public static final float HEIGHT = 25;
-    private int x = 100;
-    private int y = 100;
+    private float x = 100;
+    private float y = 100;
     private float xMaxSpeed = 2;
     private float yMaxSpeed = 2;
     private float xSpeed = 0;
@@ -70,4 +70,29 @@ public class Player {
 
     }
 
+    public void setPosition(float x, float y) {
+        this.x = x;
+        this.y = y;
+        updateHitBox();
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public Rectangle getHitBox() {
+        return hitBox;
+    }
 }
