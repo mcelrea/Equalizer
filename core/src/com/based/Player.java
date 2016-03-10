@@ -10,10 +10,10 @@ public class Player {
 
     public static final float WIDTH = 25;
     public static final float HEIGHT = 25;
-    private float x = 100;
+    private float x = 300;
     private float y = 100;
-    private float xMaxSpeed = 2;
-    private float yMaxSpeed = 2;
+    private float xMaxSpeed = 10;
+    private float yMaxSpeed = 10;
     private float xSpeed = 0;
     private float ySpeed = 0;
     private Rectangle hitBox;

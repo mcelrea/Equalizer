@@ -16,6 +16,8 @@ public class LoadingScreen implements Screen {
     @Override
     public void show() {
         game.getAssetManager().load("untitled.tmx", TiledMap.class);
+        game.getAssetManager().load("untitled2.tmx", TiledMap.class);
+        game.getAssetManager().load("untitled3.tmx", TiledMap.class);
     }
 
     /*

@@ -51,6 +51,8 @@ public class GameplayScreen implements Screen {
 
     private void createOverWorld() {
         overWorld[3][7]= new Area((TiledMap)game.getAssetManager().get("untitled.tmx"));
+        overWorld[2][7]= new Area((TiledMap)game.getAssetManager().get("untitled2.tmx"));
+        overWorld[2][8]= new Area((TiledMap)game.getAssetManager().get("untitled3.tmx"));
         currentArea = overWorld[3][7];
     }
 
@@ -97,6 +99,38 @@ public class GameplayScreen implements Screen {
         Array<CollisionCell> collisionCells = whichCellsDoesPlayerCover();
         filterOutNonCollisionCells(collisionCells);
         handlePlayerCollision();
+        handleAreaTransition();
+    }
+
+    private void handleAreaTransition() {
+        //goes off top of the screen
+        if(player.getY() > WORLD_HEIGHT) {
+            player.setPosition(player.getX(),0);
+            playerRow--;
+            currentArea = overWorld[playerRow][playerCol];
+            mapRenderer.setMap(currentArea.getMap());
+        }
+        //goes off the bottom of the screen
+        else if(player.getY() < 0) {
+            player.setPosition(player.getX(),WORLD_HEIGHT - player.HEIGHT);
+            playerRow++;
+            currentArea = overWorld[playerRow][playerCol];
+            mapRenderer.setMap(currentArea.getMap());
+        }
+        //goes off the right of the screen
+        else if(player.getX() > WORLD_WIDTH) {
+            player.setPosition(0, player.getY());
+            playerCol++;
+            currentArea = overWorld[playerRow][playerCol];
+            mapRenderer.setMap(currentArea.getMap());
+        }
+        //goes off the left of the screen
+        else if(player.getX() < 0) {
+            player.setPosition(WORLD_WIDTH - player.WIDTH, player.getY());
+            playerCol--;
+            currentArea = overWorld[playerRow][playerCol];
+            mapRenderer.setMap(currentArea.getMap());
+        }
     }
 
     private void clearScreen() {
@@ -147,13 +181,19 @@ public class GameplayScreen implements Screen {
         for(Iterator<CollisionCell> iter = cells.iterator(); iter.hasNext();) {
             CollisionCell collisionCell = iter.next();
 
-            if(collisionCell.isEmpty()) {
+            if(collisionCell == null) {
                 iter.remove();
             }
-            if(collisionCell.getId() == 1) {
+            else if(collisionCell.isEmpty()) {
                 iter.remove();
             }
-            if(collisionCell.getId() == 2) {
+            else if(collisionCell.getId() == 1) {
+                iter.remove();
+            }
+            else if(collisionCell.getId() == 2) {
+                iter.remove();
+            }
+            else if(collisionCell.getId() == 3) {
                 iter.remove();
             }
         }
