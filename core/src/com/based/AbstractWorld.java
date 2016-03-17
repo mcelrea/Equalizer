@@ -166,6 +166,9 @@ public abstract class AbstractWorld implements Screen {
             else if(collisionCell.getId() == 3) {
                 iter.remove();
             }
+            else if(collisionCell.getId() == 4) {
+                iter.remove();
+            }
         }
 
         return cells;
