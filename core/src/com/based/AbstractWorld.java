@@ -39,6 +39,8 @@ public abstract class AbstractWorld implements Screen {
 
     public abstract void createOverWorld();
 
+    public abstract void handleWorldChange();
+
     @Override
     public abstract void show();
 
@@ -64,10 +66,11 @@ public abstract class AbstractWorld implements Screen {
         mapRenderer.render();
     }
 
-    private void update(float delta) {
+    public void update(float delta) {
         player.update();
         Array<CollisionCell> collisionCells = whichCellsDoesPlayerCover();
         filterOutNonCollisionCells(collisionCells);
+        System.out.println(collisionCells);
         handlePlayerCollision();
         handleAreaTransition();
     }
@@ -147,7 +150,19 @@ public abstract class AbstractWorld implements Screen {
         return cellsCovered;
     }
 
-    private Array<CollisionCell> filterOutNonCollisionCells(Array<CollisionCell> cells) {
+    public Array<CollisionCell> filterOutNullCells(Array<CollisionCell> cells) {
+        for(Iterator<CollisionCell> iter = cells.iterator(); iter.hasNext();) {
+            CollisionCell collisionCell = iter.next();
+
+            if(collisionCell == null) {
+                iter.remove();
+            }
+        }
+
+        return cells;
+    }
+
+    public Array<CollisionCell> filterOutNonCollisionCells(Array<CollisionCell> cells) {
         for(Iterator<CollisionCell> iter = cells.iterator(); iter.hasNext();) {
             CollisionCell collisionCell = iter.next();
 
@@ -157,16 +172,10 @@ public abstract class AbstractWorld implements Screen {
             else if(collisionCell.isEmpty()) {
                 iter.remove();
             }
-            else if(collisionCell.getId() == 1) {
+            else if(collisionCell.getId() >= 1 && collisionCell.getId() <= 15) {
                 iter.remove();
             }
-            else if(collisionCell.getId() == 2) {
-                iter.remove();
-            }
-            else if(collisionCell.getId() == 3) {
-                iter.remove();
-            }
-            else if(collisionCell.getId() == 4) {
+            else if(collisionCell.getId() >= 33 && collisionCell.getId() <= 48) {
                 iter.remove();
             }
         }
@@ -178,6 +187,10 @@ public abstract class AbstractWorld implements Screen {
         Array<CollisionCell> playerCells = whichCellsDoesPlayerCover();
         playerCells = filterOutNonCollisionCells(playerCells);
         for(CollisionCell cell: playerCells) {
+            if(cell.getId() == 16) {
+                handleWorldChange();
+                return;
+            }
             float cellLevelX = cell.getCellRow() * CELL_SIZE;
             float cellLevelY = cell.getCellCol() * CELL_SIZE;
             Rectangle intersection = new Rectangle();

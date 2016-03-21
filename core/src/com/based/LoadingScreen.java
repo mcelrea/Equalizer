@@ -18,6 +18,7 @@ public class LoadingScreen implements Screen {
         game.getAssetManager().load("untitled.tmx", TiledMap.class);
         game.getAssetManager().load("untitled2.tmx", TiledMap.class);
         game.getAssetManager().load("untitled3.tmx", TiledMap.class);
+        game.getAssetManager().load("tempDungeon.tmx", TiledMap.class);
     }
 
     /*

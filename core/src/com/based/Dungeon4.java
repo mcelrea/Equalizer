@@ -1,21 +1,22 @@
 package com.based;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-/**
- * Created by Tech on 3/3/2016.
+/*
+ * Programmer : Rivera
+ * Item Found: Bomb
  */
-public class GameplayScreen extends AbstractWorld {
+public class Dungeon4 extends AbstractWorld {
 
-    public GameplayScreen(MyGdxGame game) {
+    public Dungeon4(MyGdxGame game, Player player) {
         this.game = game;
+        this.player = player;
+
         camera = new OrthographicCamera();
         camera.position.set(WORLD_WIDTH/2,WORLD_HEIGHT/2,0);
         shapeRenderer = new ShapeRenderer();
@@ -30,26 +31,23 @@ public class GameplayScreen extends AbstractWorld {
         mapRenderer.setView(camera);
     }
 
+
     @Override
-    public void show() {
-        player = new Player();
-    }
-
-
     public void createOverWorld() {
         world = new Area[10][10];
-        world[3][7]= new Area((TiledMap)game.getAssetManager().get("untitled.tmx"));
-        world[2][7]= new Area((TiledMap)game.getAssetManager().get("untitled2.tmx"));
-        world[2][8]= new Area((TiledMap)game.getAssetManager().get("untitled3.tmx"));
-        currentArea = world[3][7];
+        world[0][0]= new Area((TiledMap)game.getAssetManager().get("tempDungeon.tmx"));
+        currentArea = world[0][0];
+        playerRow = 0;
+        playerCol = 0;
     }
 
     @Override
     public void handleWorldChange() {
-        //if player is at [2][8] and hits a dungeon door, load dungeon1
-        if(playerRow == 2 && playerCol == 8)
-            game.setScreen(new Dungeon2(game,player));
+
     }
 
+    @Override
+    public void show() {
 
+    }
 }
