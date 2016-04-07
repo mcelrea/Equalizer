@@ -57,6 +57,7 @@ public abstract class AbstractWorld implements Screen {
         shapeRenderer.setTransformMatrix(camera.view);
         shapeRenderer.begin();
         player.drawDebug(shapeRenderer);
+        currentArea.drawDebug(shapeRenderer);
         shapeRenderer.end();
     }
 
@@ -73,6 +74,8 @@ public abstract class AbstractWorld implements Screen {
         System.out.println(collisionCells);
         handlePlayerCollision();
         handleAreaTransition();
+
+        currentArea.enemiesAct(delta);
     }
 
     private void handleAreaTransition() {

@@ -39,6 +39,7 @@ public class GameplayScreen extends AbstractWorld {
     public void createOverWorld() {
         world = new Area[10][10];
         world[3][7]= new Area((TiledMap)game.getAssetManager().get("untitled.tmx"));
+        world[3][7].addEnemy(new FirstEnemy(400,300,1,1));
         world[2][7]= new Area((TiledMap)game.getAssetManager().get("untitled2.tmx"));
         world[2][8]= new Area((TiledMap)game.getAssetManager().get("untitled3.tmx"));
         currentArea = world[3][7];

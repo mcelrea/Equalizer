@@ -7,16 +7,20 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public abstract class Enemy {
 
-    private int health;
-    private int damage;
-    private Animation walk;
-    private Animation attack;
-    private Animation die;
-    private Texture idle;
+    protected int health;
+    protected int damage;
+    protected float x;
+    protected float y;
+    protected Animation walk;
+    protected Animation attack;
+    protected Animation die;
+    protected Texture idle;
 
-    public Enemy(int health, int damage) {
+    public Enemy(float x, float y, int health, int damage) {
         this.health = health;
         this.damage = damage;
+        this.x = x;
+        this.y = y;
     }
 
     //move enemy code (A.I.)
