@@ -48,7 +48,7 @@ public class GameplayScreen extends AbstractWorld {
     public void handleWorldChange() {
         //if player is at [2][8] and hits a dungeon door, load dungeon1
         if(playerRow == 2 && playerCol == 8)
-            game.setScreen(new Dungeon2(game,player));
+            game.setScreen(new Dungeon10(game,player));
     }
 
 
