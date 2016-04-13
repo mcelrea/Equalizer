@@ -68,7 +68,7 @@ public abstract class AbstractWorld implements Screen {
     }
 
     public void update(float delta) {
-        player.update();
+        player.update(delta);
         Array<CollisionCell> collisionCells = whichCellsDoesPlayerCover();
         filterOutNonCollisionCells(collisionCells);
         System.out.println(collisionCells);

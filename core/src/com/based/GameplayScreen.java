@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
  */
 public class GameplayScreen extends AbstractWorld {
 
+
     public GameplayScreen(MyGdxGame game) {
         this.game = game;
         camera = new OrthographicCamera();
